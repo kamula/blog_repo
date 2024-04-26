@@ -3,9 +3,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import useSearchStore from '../../utils/store/useSearchStore';
 import { FaSearch } from 'react-icons/fa';
+import { useState } from 'react';
+import CreateBlogFormModal from '../home/CreateBlogFormModal';
+import CreateBlogForm from '../home/CreateBlogForm';
 
 const NavBar = () => {
     const { searchQuery, setSearchQuery } = useSearchStore();
+    const [isModalOpen, setModalOpen] = useState(false);
     return (
         <nav className='bg-slate-200'>
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between p-4 mx-auto">
@@ -38,11 +42,12 @@ const NavBar = () => {
                             <FaSearch />
                         </button>
                     </div>
-                    <Link href="/blogs/create">
-                        <span className="bg-gray-500 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded cursor-pointer">
-                            Create Blog Post
-                        </span>
-                    </Link>
+                    <button
+                        onClick={() => setModalOpen(true)}
+                        className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded cursor-pointer"
+                    >
+                        Create Blog Post
+                    </button>
                 </div>
                 <div className="md:hidden">
                     <button aria-label="Open Menu" className="text-gray-700 hover:text-gray-900 focus:outline-none focus:shadow-outline">
@@ -52,6 +57,9 @@ const NavBar = () => {
                     </button>
                 </div>
             </div>
+            <CreateBlogFormModal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
+                <CreateBlogForm />
+            </CreateBlogFormModal>
         </nav>
     );
 };

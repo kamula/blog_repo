@@ -8,11 +8,11 @@ import { filterPosts } from '@/utils/filterUtils';
 
 const HomePage = () => {
   const { searchQuery } = useSearchStore();
-  const [filteredPosts, setFilteredPosts] = useState([]);
+  const [filteredPosts, setFilteredPosts]: any = useState([]);
 
   useEffect(() => {
     setFilteredPosts(filterPosts(blogPosts, searchQuery));
-}, [searchQuery]);
+  }, [searchQuery]);
 
   return (
     <div className='container mx-auto'>
