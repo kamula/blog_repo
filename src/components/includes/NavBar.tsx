@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const NavBar = () => {
     return (
-        <nav className='bg-slate-300'>
+        <nav className='bg-slate-200'>
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between p-4 mx-auto">
                 <div className="flex items-center">
                     <Link href="/" passHref>
