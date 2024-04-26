@@ -3,21 +3,26 @@ import Link from 'next/link'
 import BlogCard from '@/components/blog/BlogCard'
 import blogPosts from '../../data/blogData'
 import { FaSearch } from 'react-icons/fa';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { filterPosts } from '../../utils/filterUtils';
+import useSearchStore from '@/utils/store/useSearchStore';
 
 const BlogHomePage = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const { searchQuery, setSearchQuery } = useSearchStore();
   const [filteredPosts, setFilteredPosts] = useState(blogPosts);
   const [filteredPostsCount, setFilteredPostsCount] = useState(0);
 
 
-  const handleSearch = (event: any) => {
-    const value = event.target.value;
-    setSearchQuery(value);
-    const filtered = filterPosts(blogPosts, value);
+
+
+  useEffect(() => {
+    const filtered = filterPosts(blogPosts, searchQuery);
     setFilteredPosts(filtered);
     setFilteredPostsCount(filtered.length);
+  }, [searchQuery]);
+
+  const handleSearch = (event:any) => {
+    setSearchQuery(event.target.value);
   };
 
 

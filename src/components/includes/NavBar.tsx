@@ -1,7 +1,11 @@
+'use client'
 import Link from 'next/link';
 import Image from 'next/image';
+import useSearchStore from '../../utils/store/useSearchStore';
+import { FaSearch } from 'react-icons/fa';
 
 const NavBar = () => {
+    const { searchQuery, setSearchQuery } = useSearchStore();
     return (
         <nav className='bg-slate-200'>
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between p-4 mx-auto">
@@ -20,8 +24,19 @@ const NavBar = () => {
                     <Link href="/blogs">
                         <span className="text-gray-700 hover:text-gray-900 cursor-pointer">Blogs</span>
                     </Link>
-                    <div>
-                        <input type="text" placeholder="Search blogs..." className="px-2 py-1 border rounded" />
+                    <div className="relative">
+                        <input
+                            type="text"
+                            placeholder="Search blogs..."
+                            className="px-2 py-1 border border-black rounded w-full pl-3 pr-10"
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                        />
+                        <button
+                            className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
+
+                        >
+                            <FaSearch />
+                        </button>
                     </div>
                     <Link href="/blogs/create">
                         <span className="bg-gray-500 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded cursor-pointer">

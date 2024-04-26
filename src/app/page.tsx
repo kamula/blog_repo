@@ -1,8 +1,19 @@
-import Link from 'next/link'
+'use client'
+import Link from 'next/link';
+import useSearchStore from '@/utils/store/useSearchStore';
 import blogPosts from '../data/blogData'
 import BlogCard from '@/components/blog/BlogCard'
+import { useEffect, useState } from 'react';
+import { filterPosts } from '@/utils/filterUtils';
 
 const HomePage = () => {
+  const { searchQuery } = useSearchStore();
+  const [filteredPosts, setFilteredPosts] = useState([]);
+
+  useEffect(() => {
+    setFilteredPosts(filterPosts(blogPosts, searchQuery));
+}, [searchQuery]);
+
   return (
     <div className='container mx-auto'>
       <div className="flex flex-col p-5">
@@ -11,7 +22,7 @@ const HomePage = () => {
       </div>
       <div className="w-full p-5 grid grid-cols-1 md:grid-cols-3 gap-4">
         {
-          blogPosts && blogPosts.map((item) => (
+          filteredPosts && filteredPosts.map((item) => (
             <Link key={item.id} href={`/blogs/${item.slug}`} className="w-full">
               <BlogCard
                 title={item.title}
