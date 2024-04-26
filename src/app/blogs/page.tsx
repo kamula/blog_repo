@@ -4,6 +4,7 @@ import BlogCard from '@/components/blog/BlogCard'
 import blogPosts from '../../data/blogData'
 import { FaSearch } from 'react-icons/fa';
 import { useState } from 'react';
+import { filterPosts } from '../../utils/filterUtils';
 
 const BlogHomePage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -12,16 +13,13 @@ const BlogHomePage = () => {
 
 
   const handleSearch = (event: any) => {
-    const value = event.target.value.toLowerCase();
+    const value = event.target.value;
     setSearchQuery(value);
-    const filtered = blogPosts.filter(post =>
-      post.title.toLowerCase().includes(value) ||
-      post.content.toLowerCase().includes(value)
-    );
+    const filtered = filterPosts(blogPosts, value);
     setFilteredPosts(filtered);
-    setFilteredPostsCount(filteredPosts.length);
-
+    setFilteredPostsCount(filtered.length);
   };
+
 
   return (
     <div className='mx-auto mt-2'>
