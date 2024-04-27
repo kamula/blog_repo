@@ -50,5 +50,7 @@ bun dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 
+## Deployed Link
 
+Visit the live project here: [Deployed Project](https://blog-seven-lovat-95.vercel.app/)
 ```
