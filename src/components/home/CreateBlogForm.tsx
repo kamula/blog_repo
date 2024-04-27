@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form"
 import { IoMdCloudUpload } from 'react-icons/io';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 type Inputs = {
@@ -18,7 +20,10 @@ const CreateBlogForm = () => {
         watch,
         formState: { errors },
     } = useForm<Inputs>()
-    const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+    const onSubmit: SubmitHandler<Inputs> = (data) => {
+        toast.success('Successfully added blog post')
+        console.log(data)
+    }
 
     const [count, setCount] = useState(100);
 
@@ -28,11 +33,12 @@ const CreateBlogForm = () => {
     };
     return (
         <form className="mt-3 " onSubmit={handleSubmit(onSubmit)}>
+            <ToastContainer />
             <div>
                 <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-500">Blog Title</label>
                 <input
                     type="text" id="first_name"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5  dark:border-gray-200 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5  dark:border-gray-200 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Harry potter"
                     {...register("title", { required: true })}
                 />
@@ -42,7 +48,7 @@ const CreateBlogForm = () => {
                 <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-500">Blog Date</label>
                 <input
                     type="date" id="date"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5  dark:border-gray-200 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5  dark:border-gray-200 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Harry potter"
                     {...register("date", { required: true })}
                 />
@@ -51,8 +57,8 @@ const CreateBlogForm = () => {
             <div className="mt-2">
                 <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-500">Blog Slug</label>
                 <input
-                    type="date" id="date"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5  dark:border-gray-200 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    type="text" id="date"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5  dark:border-gray-200 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Harry potter"
                     {...register("slug", { required: true })}
                 />
