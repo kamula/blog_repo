@@ -1,7 +1,7 @@
 'use client'
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form"
-import { IoMdCloudUpload } from 'react-icons/io';
+import { FiUploadCloud } from "react-icons/fi";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -14,6 +14,8 @@ type Inputs = {
     content: string
 }
 const CreateBlogForm = () => {
+
+
     const {
         register,
         handleSubmit,
@@ -32,7 +34,7 @@ const CreateBlogForm = () => {
         setCount(100 - inputLength);
     };
     return (
-        <form className="mt-3 " onSubmit={handleSubmit(onSubmit)}>
+        <form className="mt-3 p-2" onSubmit={handleSubmit(onSubmit)}>
             <ToastContainer />
             <div>
                 <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-500">Blog Title</label>
@@ -65,19 +67,21 @@ const CreateBlogForm = () => {
                 {errors.slug && <span className="text-red-500 text-xs mt-1">This field is required</span>}
             </div>
 
-            <div className="mt-2 ">
+            <div className="mt-2">
                 <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-500">Upload Image</label>
-                <div className="flex flex-col items-center justify-center p-4 border-2 border-dashed border-black rounded-lg text-gray-900 dark:border-gray-200">
-                    <IoMdCloudUpload className="text-3xl text-gray-700 dark:text-gray-300" />
-                    <p className="text-sm text-black">
+                <div className="relative flex flex-col items-center justify-center p-4 border-2 border-dashed border-black rounded-lg cursor-pointer">
+                    <FiUploadCloud className="text-3xl text-gray-700 mb-2" />
+                    <p className="text-xs text-gray-700">
                         Please upload images in 100x100 pixels size in either PNG or JPEG format
                     </p>
                     <input
                         type="file"
                         accept="image/*"
-                        className="opacity-0 absolute"
+                        className="opacity-0 absolute inset-0 w-full h-full cursor-pointer"
                         {...register("image", { required: "Image is required" })}
                     />
+                    <span className="bg-blue-950 text-white text-sm font-bold py-2 px-4 rounded">Browse Files</span>
+
                 </div>
                 {errors.image && <span className="text-red-500 text-xs mt-1">{errors.image.message}</span>}
             </div>
