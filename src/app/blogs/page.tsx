@@ -6,11 +6,21 @@ import { FaSearch } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import { filterPosts } from '../../utils/filterUtils';
 import useSearchStore from '@/utils/store/useSearchStore';
+import Pagination from '@/components/home/Pagination';
 
 const BlogHomePage = () => {
   const { searchQuery, setSearchQuery } = useSearchStore();
   const [filteredPosts, setFilteredPosts] = useState(blogPosts);
   const [filteredPostsCount, setFilteredPostsCount] = useState(0);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(6);
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
 
 
@@ -21,7 +31,7 @@ const BlogHomePage = () => {
     setFilteredPostsCount(filtered.length);
   }, [searchQuery]);
 
-  const handleSearch = (event:any) => {
+  const handleSearch = (event: any) => {
     setSearchQuery(event.target.value);
   };
 
@@ -70,6 +80,9 @@ const BlogHomePage = () => {
             </Link>
           ))
         }
+      </div>
+      <div className="flex justify-center py-2">
+        <Pagination postsPerPage={postsPerPage} totalPosts={filteredPosts.length} paginate={paginate} />
       </div>
     </div>
   )
