@@ -17,7 +17,7 @@ interface BlogPost {
 
 const BlogDetailspage = ({ params }: { params: { slug: string } }) => {
     const { slug } = params;
-    const [blog, setBlog] = useState({});
+    const [blog, setBlog] = useState<BlogPost>();
 
     useEffect(() => {
         // get single blog using slug
@@ -42,35 +42,37 @@ const BlogDetailspage = ({ params }: { params: { slug: string } }) => {
                     </div>
                 </Link>
             </div>
-            <div className="p-5">
-                <div className="text-center">
-                    <h5 className='text-4xl font-bold'>{blog.title}</h5>
-                    <p className='text-sm font-medium py-2'>{formatDate(blog.date)} . 5 min Read</p>
+            {blog &&
+                <div className="p-5">
+                    <div className="text-center">
+                        <h5 className='text-4xl font-bold'>{blog.title}</h5>
+                        <p className='text-sm font-medium py-2'>{formatDate(blog.date)} . 5 min Read</p>
+                    </div>
+                    <div className='w-full flex justify-center items-center bg-slate-200 py-3'>
+                        <Image
+                            src={blog.image}
+                            width={500}
+                            height={500}
+                            alt={blog.title}
+                            objectFit='cover'
+                            className='object-cover'
+                        />
+                    </div>
+                    <div>
+                        <p>
+                            {blog.content}
+                            {blog.content}
+                            {blog.content}
+                            {blog.content}
+                            {blog.content}
+                            {blog.content}
+                            {blog.content}
+                            {blog.content}
+                        </p>
+
+                    </div>
                 </div>
-                <div className='w-full flex justify-center items-center bg-slate-200 py-3'>
-                    <Image
-                        src={blog.image}
-                        width={500}
-                        height={500}
-                        alt={blog.title}
-                        objectFit='cover'
-                        className='object-cover'
-                    />
-                </div>
-                <div>
-                    <p>
-                        {blog.content}
-                        {blog.content}
-                        {blog.content}
-                        {blog.content}
-                        {blog.content}
-                        {blog.content}
-                        {blog.content}
-                        {blog.content}
-                    </p>
-                    
-                </div>
-            </div>
+            }
 
 
         </div>

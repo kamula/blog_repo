@@ -80,7 +80,7 @@ const CreateBlogForm = () => {
                 <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-gray-500">Content</label>
                 <textarea
                     id="content"
-                    rows="4"
+                    // rows="4"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:border-gray-200 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter text (max 100 characters)"
                     {...register("content", { required: true })}

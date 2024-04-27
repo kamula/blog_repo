@@ -22,7 +22,7 @@ const HomePage = () => {
       </div>
       <div className="w-full p-5 grid grid-cols-1 md:grid-cols-3 gap-4">
         {
-          filteredPosts && filteredPosts.map((item) => (
+          filteredPosts && filteredPosts.map((item: any) => (
             <Link key={item.id} href={`/blogs/${item.slug}`} className="w-full">
               <BlogCard
                 title={item.title}

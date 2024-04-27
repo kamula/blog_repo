@@ -16,7 +16,7 @@ To get started with this project, you'll need to clone the repository. Run the f
 
 ```bash
 git clone https://github.com/kamula/blog_repo.git
-cd your-repository-name
+cd blog_repo
 ```
 
 ### Installing Dependencies
